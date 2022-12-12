@@ -18,5 +18,4 @@ class PersonViewHolder(
             view.findViewById(R.id.item_first_name)
         val itemLastName: TextView =
             view.findViewById(R.id.item_last_name)
-//gg
 }
