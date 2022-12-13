@@ -1,5 +1,6 @@
 package com.example.recyclerview
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,7 +13,6 @@ import com.example.recyclerview.adaper.createListOfPersons
 
 class MainActivity : AppCompatActivity() {
 
-
     /**
     1.- Create a item_layout xml file
     2.- Create a subclass RecyclerView.ViewHolder()
@@ -20,27 +20,26 @@ class MainActivity : AppCompatActivity() {
     4.- Implement a layoutManager
      */
 
-
     private lateinit var personList: RecyclerView
     private lateinit var adapter: PersonAdapter
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         personList = findViewById(R.id.person_list)
-        adapter = PersonAdapter(createListOfPersons())
+        adapter = PersonAdapter(createListOfPersons() ) {
+            val navigateDetails = Intent()
+            navigateDetails.setClass(this,DetailActivity::class.java)
+
+            navigateDetails.putExtra(DetailActivity.EXTRA_FIRST_NAME, it.firsName)
+            navigateDetails.putExtra(DetailActivity.EXTRA_LAST_NAME, it.lastName)
+
+            startActivity(navigateDetails)
+        }
 
         personList.adapter =  adapter
         personList.layoutManager = selectLayoutManager()
-
-
-
-
-
-
 
     }
 
@@ -57,6 +56,5 @@ class MainActivity : AppCompatActivity() {
 
         return linearLayoutManager
     }
-
 
 }

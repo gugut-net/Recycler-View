@@ -7,14 +7,16 @@ import com.example.recyclerview.R
 
 
 
-class PersonAdapter(private val dataSet: List<Person>): RecyclerView.Adapter<PersonViewHolder>() {
+class PersonAdapter(
+    private val dataSet: List<Person>,
+    private val openDetails:(Person) -> Unit):
+    RecyclerView.Adapter<PersonViewHolder>() {
 
     /**
      * Create the defined ViewHolder from the Generics
      * @param parent: ViewGroup -> View Container (item_layout)
      * @param ViewType:Int -> The current VH.
      */
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonViewHolder {
 
         return PersonViewHolder(
@@ -25,9 +27,7 @@ class PersonAdapter(private val dataSet: List<Person>): RecyclerView.Adapter<Per
             )
 
         )
-
     }
-
     /**
      * Connect the view with the date
      * @param posiion: index position of he data
@@ -35,13 +35,14 @@ class PersonAdapter(private val dataSet: List<Person>): RecyclerView.Adapter<Per
     override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
         holder.itemFirstName.text = dataSet[position].firsName
         holder.itemLastName.text = dataSet[position].lastName
+        holder.itemView.setOnClickListener {
+            openDetails(dataSet[position])
+        }
 
     }
-
     /**
      * Return N number of items
      */
-
     override fun getItemCount(): Int {
         return dataSet.size
     }

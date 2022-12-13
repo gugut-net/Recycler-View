@@ -9,22 +9,8 @@ fun createListOfPersons(): List<Person> {
         Person("john", "doe"),
         Person("alex", "smith"),
 
-        Person("john", "boo"),
-        Person("marry", "christmas"),
-        Person("john", "doe"),
-        Person("alex", "smith"),
-
-        Person("john", "boo"),
-        Person("marry", "christmas"),
-        Person("john", "doe"),
-        Person("alex", "smith"),
-
-
-
     )
 }
-
-
 
 data class Person(
     val firsName: String,
